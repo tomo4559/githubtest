@@ -5,6 +5,8 @@
 $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
 $user_town = $_POST["input_data"];
 
+print 'user_town:'.$user_town.'<br>'
+
 $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
 $response_1 = json_decode($url_1, true);
 $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
