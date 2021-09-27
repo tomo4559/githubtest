@@ -1,5 +1,5 @@
 <?php
-$accessToken = 'VtHfCBKb30+H9HLyOr01j5VivlA4oiyAMJqv6ZCCXYQ0DW/j4/03rfv6R6WFjl1HSEQURdJ+XJnOJ6wVOUp5scGXT4h8K2CVisLxLO2E9NVTVqMFwdmsPlnd0W9Cf29KZkpoYW+xqpF8hWuE2BRTdwdB04t89/1O/w1cDnyilFU=';
+$accessToken = 'fNPGknPY8lJOKpY70fYgivKu/s8RAy1kvQKP8ZQuBquVvQpQu7kp1qxBgz9OkbOkOZ84/6YxlMwCR+BcG0C4aztwwsQihcXpUgLym15ik8FUS7+ah3CIjL/htIoNat040Q9VK+4Lx/hl8R1l9SqBWAdB04t89/1O/w1cDnyilFU=';
 $jsonString = file_get_contents('php://input'); error_log($jsonString);
 $jsonObj = json_decode($jsonString); $message = $jsonObj->{"events"}[0]->{"message"};
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
