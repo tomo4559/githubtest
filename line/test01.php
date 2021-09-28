@@ -13,7 +13,7 @@ if ($message->{"text"} == '確認') {
         'altText' => '確認ダイアログ',
         'template' => [ 'type' => 'confirm', 'text' => '元気ですかー？',
             'actions' => [
-                [ 'type' => 'message', 'label' => '元気です', 'text' => '元気です' ],
+                [ 'type' => 'message', 'label' => '元気です', 'text' => $replyToken ],
                 [ 'type' => 'message', 'label' => 'まあまあです', 'text' => 'まあまあです' ],
             ]
         ]
@@ -98,3 +98,4 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($response));
 curl_setopt($ch, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json; charser=UTF-8', 'Authorization: Bearer ' . $accessToken ));
 $result = curl_exec($ch); error_log($result);
 curl_close($ch);
+?>
