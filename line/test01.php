@@ -79,8 +79,8 @@ curl_close($ch);
 
 
 class get_weather{
-  var $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
-  var $user_town = "大阪府八尾市";
+  public static $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
+  public static  $user_town = "大阪府八尾市";
 
   function get_loc(){
     $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
