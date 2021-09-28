@@ -84,8 +84,7 @@ if ($message->{"text"} == 'テスト') {
                     ],
                 ]
             ]
-    ]
- }
+    ];
 } elseif ($message->{"text"} == '天気') {
   $messageData = [ 'type' => 'text', 'text' => "天気" ];
 }
