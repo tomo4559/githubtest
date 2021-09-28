@@ -6,9 +6,9 @@ $message = $jsonObj->{"events"}[0]->{"message"};
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
 if ($message->{"type"} == 'location') {
-  $latitude=$message->{"latitude"}
-  $longitude=$message->{"longitude"}
-  $adrs=$message->{"address"}
+  $latitude=$message->{"latitude"};
+  $longitude=$message->{"longitude"};
+  $adrs=$message->{"address"};
   $txtmsg="latitude:".$latitude."\n";
   $txtmsg.="longitude:".$longitude."\n";
   $txtmsg.="address:".$adrs."\n";
