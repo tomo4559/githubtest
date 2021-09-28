@@ -14,8 +14,8 @@ if ($message->{"text"} == 'テスト') {
         'altText' => '確認ダイアログ',
         'template' => [ 'type' => 'confirm', 'text' => '元気ですかー？',
             'actions' => [
-                [ 'type' => 'message', 'label' => '元気です', 'text' => $replyToken ],
-                [ 'type' => 'message', 'label' => 'まあまあです', 'text' => 'まあまあです?' ],
+                [ 'type' => 'message', 'label' => 'replyToken', 'text' => $replyToken ],
+                [ 'type' => 'message', 'label' => 'jsonObj', 'text' => $jsonObj' ],
             ]
         ]
  ];
