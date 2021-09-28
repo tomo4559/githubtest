@@ -130,7 +130,7 @@ class get_weather{
         $rainy = $response_2['Feature'][0]['Property']['WeatherList']['Weather'][$i]["Rainfall"];
         $hour = substr_replace(substr($date,8),":",2);
         $minute = substr($date,10);
-        $msg = $msg.$hour."時".$minute."分　予測雨量: ".$rainy."mm/h <br>";
+        $msg = $msg.$hour."時".$minute."分 : ".$rainy."mm/h\n";
     }
     return $msg;
   }
