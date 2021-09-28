@@ -18,7 +18,7 @@ if ($message->{"type"} == 'location') {
 
   $weather = new get_weather();
   $keido_ido=$latitude.",".$longitude;
-  $txtmsg. =  $weather->get_weather($api_yahoo,$keido_ido);
+  $txtmsg =  $weather->get_weather($api_yahoo,$keido_ido);
 
   $messageData = [ 'type' => 'text', 'text' => $txtmsg];
 
