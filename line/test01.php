@@ -84,7 +84,7 @@ if ($message->{"text"} == 'テスト') {
                     ],
                 ]
             ]
-    ];
+    ]
  }
 } elseif ($message->{"text"} == '天気') {
   $messageData = [ 'type' => 'text', 'text' => "天気" ];
@@ -92,7 +92,7 @@ if ($message->{"text"} == 'テスト') {
  else {
      // それ以外は送られてきたテキストをオウム返し
      $messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
-}
+};
 $response = [ 'replyToken' => $replyToken, 'messages' => [$messageData] ];
 error_log(json_encode($response));
 $ch = curl_init('https://api.line.me/v2/bot/message/reply');
