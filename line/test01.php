@@ -15,7 +15,6 @@ if ($message->{"text"} == 'テスト') {
         'template' => [ 'type' => 'confirm', 'text' => '元気ですかー？',
             'actions' => [
                 [ 'type' => 'message', 'label' => '元気です', 'text' => $replyToken ],
-                [ 'type' => 'message', 'label' => '元気です？', 'text' => $replyToken ],
                 [ 'type' => 'message', 'label' => 'まあまあです', 'text' => 'まあまあです?' ],
             ]
         ]
