@@ -7,7 +7,7 @@ $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
 
  // 送られてきたメッセージの中身からレスポンスのタイプを選択
-if ($message->{"text"} == '確認') {
+if ($message->{"text"} == 'テスト') {
      // 確認ダイアログタイプ
     $messageData = [
         'type' => 'template',
