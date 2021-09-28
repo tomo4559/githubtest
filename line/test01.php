@@ -117,7 +117,7 @@ class get_weather{
     $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
     $city = $response_1['Feature'][0]['Name'];
 
-    $msg = $city.' の 5分毎の降水確率<br>';
+    $msg = $city."\n5分毎の降水確率\n";
 
     // https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/weather.html
     $url_2 = file_get_contents('https://map.yahooapis.jp/weather/V1/place?coordinates='. $keido_ido. '&appid='. $api_yahoo. '&output=json&interval=5');
