@@ -3,7 +3,6 @@
 <h3>5分ごとの天気予測</h3>
 <?php
   include('get_weather.php');
-
   $weather = new get_weather();
   $loc=$weather->get_loc();
   print  $weather->get_weather($loc);

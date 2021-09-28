@@ -55,8 +55,8 @@ if ($message->{"text"} == 'テスト') {
 } elseif ($message->{"text"} == '天気') {
 
   $weather = new get_weather();
-  $keido_ido=$weather->get_loc();
-  $txtmsg =  $weather->get_weather($keido_ido);
+  $keido_ido=$weather->get_loc($api_yahoo);
+  $txtmsg =  $weather->get_weather($api_yahoo,$keido_ido);
 
   $messageData = [ 'type' => 'text', 'text' => $txtmsg];
 }
@@ -80,7 +80,7 @@ curl_close($ch);
 
 
 class get_weather{
-  function get_loc(){
+  function get_loc($api_yahoo){
     $user_town = "大阪府八尾市";
     $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
     $response_1 = json_decode($url_1, true);
@@ -89,7 +89,7 @@ class get_weather{
     return $keido_ido;
   }
 
-  function get_weather($keido_ido){
+  function get_weather($api_yahoo,$keido_ido){
     // https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/weather.html
     $url_2 = file_get_contents('https://map.yahooapis.jp/weather/V1/place?coordinates='. $keido_ido. '&appid='. $api_yahoo. '&output=json&interval=5');
     $response_2 = json_decode($url_2, true);
