@@ -10,10 +10,19 @@ if ($message->{"type"} == 'location') {
   $latitude=$message->{"latitude"};
   $longitude=$message->{"longitude"};
   $adrs=$message->{"address"};
+
   $txtmsg="latitude:".$latitude."\n";
   $txtmsg.="longitude:".$longitude."\n";
   $txtmsg.="address:".$adrs."\n";
-  $messageData = [ 'type' => 'text', 'text' => $txtmsg ];
+  //$messageData = [ 'type' => 'text', 'text' => $txtmsg ];
+
+  $weather = new get_weather();
+  $keido_ido=$latitude.","$longitude
+  $txtmsg. =  $weather->get_weather($api_yahoo,$keido_ido);
+
+  $messageData = [ 'type' => 'text', 'text' => $txtmsg];
+
+
 }
 
 // 送られてきたメッセージの中身からレスポンスのタイプを選択
