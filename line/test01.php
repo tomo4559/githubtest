@@ -85,7 +85,11 @@ if ($message->{"text"} == 'テスト') {
                 ]
             ]
     ];
- } else {
+ }
+} elseif ($message->{"text"} == '天気') {
+  $messageData = [ 'type' => 'text', 'text' => "天気" ];
+}
+ else {
      // それ以外は送られてきたテキストをオウム返し
      $messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
 }
