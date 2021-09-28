@@ -6,95 +6,52 @@ $message = $jsonObj->{"events"}[0]->{"message"};
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
 
- // 送られてきたメッセージの中身からレスポンスのタイプを選択
+// 送られてきたメッセージの中身からレスポンスのタイプを選択
 if ($message->{"text"} == 'テスト') {
-     // 確認ダイアログタイプ
-    $messageData = [
-        'type' => 'template',
-        'altText' => '確認ダイアログ',
-        'template' => [ 'type' => 'confirm', 'text' => '元気ですかー？',
-            'actions' => [
-                [ 'type' => 'message', 'label' => 'replyToken', 'text' => $replyToken ],
-                [ 'type' => 'message', 'label' => 'jsonObj', 'text' => 'jsonObj' ],
-            ]
-        ]
- ];
+  // 確認ダイアログタイプ
+  $messageData = [
+    'type' => 'template',
+    'altText' => '確認ダイアログ',
+    'template' => [ 'type' => 'confirm', 'text' => '元気ですかー？',
+    'actions' => [
+      [ 'type' => 'message', 'label' => 'replyToken', 'text' => $replyToken ],
+      [ 'type' => 'message', 'label' => 'jsonObj', 'text' => 'jsonObj' ],
+    ]
+  ]
+];
 } elseif ($message->{"text"} == 'ボタン') {
-    // ボタンタイプ
-    $messageData = [
-        'type' => 'template',
-         'altText' => 'ボタン',
-        'template' => [
-             'type' => 'buttons',
-             'title' => 'タイトルです',
-             'text' => '選択してね',
-            'actions' => [
-                 [
-                    'type' => 'postback',
-                    'label' => 'webhookにpost送信',
-                    'data' => 'value'
-                ],
-                 [
-                     'type' => 'uri',
-                     'label' => 'googleへ移動',
-                     'uri' => 'https://google.com'
-                 ]
-              ]
-          ]
-     ];
-} elseif ($message->{"text"} == 'カルーセル') {
-     // カルーセルタイプ
-    $messageData = [
-        'type' => 'template',
-        'altText' => 'カルーセル',
-        'template' => [
-             'type' => 'carousel',
-            'columns' => [
-                [
-                    'title' => 'カルーセル1',
-                    'text' => 'カルーセル1です',
-                     'actions' => [
-                         [
-                            'type' => 'postback',
-                             'label' => 'webhookにpost送信',
-                             'data' => 'value'
-                         ],
-                         [
-                            'type' => 'uri',
-                            'label' => '美容の口コミ広場を見る',
-                             'uri' => 'https://report.clinic/'
-                         ]
-                    ]
-                ],
-                 [
-                        'title' => 'カルーセル2',
-                        'text' => 'カルーセル2です',
-                        'actions' => [
-                            [
-                                'type' => 'postback',
-                                'label' => 'webhookにpost送信',
-                                'data' => 'value'
-                            ],
-                            [
-                                'type' => 'uri',
-                                'label' => '女美会を見る',
-                                'uri' => 'https://jobikai.com/'
-                            ]
-                        ]
-                    ],
-                ]
-            ]
-    ];
+  // ボタンタイプ
+  $messageData = [
+    'type' => 'template',
+    'altText' => 'ボタン',
+    'template' => [
+      'type' => 'buttons',
+      'title' => 'タイトルです',
+      'text' => '選択してね',
+      'actions' => [
+        [
+          'type' => 'postback',
+          'label' => 'webhookにpost送信',
+          'data' => 'value'
+        ],
+        [
+          'type' => 'uri',
+          'label' => 'googleへ移動',
+          'uri' => 'https://google.com'
+        ]
+      ]
+    ]
+  ];
 } elseif ($message->{"text"} == '天気') {
 
-    $weather = new get_weather();
-    $txtmsg =  $weather->get_weather();
+  $weather = new get_weather();
+  $txtmsg =  $weather->get_weather();
 
   $messageData = [ 'type' => 'text', 'text' => $txtmsg];
 }
- else {
-     // それ以外は送られてきたテキストをオウム返し
-     $messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
+else {
+  // それ以外は送られてきたテキストをオウム返し
+  $messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
 };
 $response = [ 'replyToken' => $replyToken, 'messages' => [$messageData] ];
 error_log(json_encode($response));
@@ -110,8 +67,8 @@ curl_close($ch);
 
 class get_weather{
   function get_weather(){
-      $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
-      $user_town = "大阪府八尾市";
+    $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
+    $user_town = "大阪府八尾市";
     $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
     $response_1 = json_decode($url_1, true);
     $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
@@ -126,11 +83,11 @@ class get_weather{
     $data_length = count($data);
 
     for ($i=0; $i<$data_length; $i++){
-        $date = $response_2['Feature'][0]['Property']['WeatherList']['Weather'][$i]["Date"];
-        $rainy = $response_2['Feature'][0]['Property']['WeatherList']['Weather'][$i]["Rainfall"];
-        $hour = substr_replace(substr($date,8),":",2);
-        $minute = substr($date,10);
-        $msg = $msg.$hour."時".$minute."分 : ".$rainy."mm/h\n";
+      $date = $response_2['Feature'][0]['Property']['WeatherList']['Weather'][$i]["Date"];
+      $rainy = $response_2['Feature'][0]['Property']['WeatherList']['Weather'][$i]["Rainfall"];
+      $hour = substr_replace(substr($date,8),":",2);
+      $minute = substr($date,10);
+      $msg = $msg.$hour."時".$minute."分 : ".$rainy."mm/h\n";
     }
     return $msg;
   }
