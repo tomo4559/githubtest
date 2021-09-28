@@ -1,5 +1,6 @@
 <?php
 $accessToken = 'fNPGknPY8lJOKpY70fYgivKu/s8RAy1kvQKP8ZQuBquVvQpQu7kp1qxBgz9OkbOkOZ84/6YxlMwCR+BcG0C4aztwwsQihcXpUgLym15ik8FUS7+ah3CIjL/htIoNat040Q9VK+4Lx/hl8R1l9SqBWAdB04t89/1O/w1cDnyilFU=';
+$api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
 $jsonString = file_get_contents('php://input'); error_log($jsonString);
 $jsonObj = json_decode($jsonString);
 $message = $jsonObj->{"events"}[0]->{"message"};
@@ -79,10 +80,8 @@ curl_close($ch);
 
 
 class get_weather{
-  public static $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
-  public static  $user_town = "大阪府八尾市";
-
   function get_loc(){
+    $user_town = "大阪府八尾市";
     $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
     $response_1 = json_decode($url_1, true);
     $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
