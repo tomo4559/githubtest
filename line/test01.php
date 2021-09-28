@@ -54,7 +54,8 @@ if ($message->{"text"} == 'テスト') {
 } elseif ($message->{"text"} == '天気') {
 
   $weather = new get_weather();
-  $txtmsg =  $weather->get_weather();
+  $keido_ido=$weather->get_loc();
+  $txtmsg =  $weather->get_weather($keido_ido);
 
   $messageData = [ 'type' => 'text', 'text' => $txtmsg];
 }
@@ -78,21 +79,25 @@ curl_close($ch);
 
 
 class get_weather{
-  function get_weather(){
-    $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
-    $user_town = "大阪府八尾市";
+  $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
+  $user_town = "大阪府八尾市";
+
+  function get_loc(){
     $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
     $response_1 = json_decode($url_1, true);
     $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
-    $city = $response_1['Feature'][0]['Name'];
 
-    $msg = $city."\n5分毎の降水確率\n";
+    return $keido_ido;
+  }
 
+  function get_weather($keido_ido){
     // https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/weather.html
     $url_2 = file_get_contents('https://map.yahooapis.jp/weather/V1/place?coordinates='. $keido_ido. '&appid='. $api_yahoo. '&output=json&interval=5');
     $response_2 = json_decode($url_2, true);
     $data = $response_2['Feature'][0]['Property']['WeatherList']['Weather'];
     $data_length = count($data);
+
+    $msg = $user_town."\n5分毎の降水確率\n";
 
     for ($i=0; $i<$data_length; $i++){
       $date = $response_2['Feature'][0]['Property']['WeatherList']['Weather'][$i]["Date"];

@@ -1,14 +1,20 @@
 <!-- 住所 -> 緯度、軽度 https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/geocoder.html -->
 <?php
 class get_weather{
-  function get_weather(){
+
       $api_yahoo = "dj00aiZpPU9CYlNuZmNxaldldyZzPWNvbnN1bWVyc2VjcmV0Jng9OTY-";
       $user_town = "大阪府八尾市";
-    $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
-    $response_1 = json_decode($url_1, true);
-    $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
-    $city = $response_1['Feature'][0]['Name'];
 
+  function getloc(){
+    $url_1 = file_get_contents('https://map.yahooapis.jp/geocode/V1/geoCoder?appid='. $api_yahoo. '&output=json&query='. $user_town);
+     $response_1 = json_decode($url_1, true);
+    $keido_ido = $response_1['Feature'][0]['Geometry']['Coordinates'];
+
+    return $keido_ido
+
+  }
+
+  function get_weather($keido_ido){
     $msg = $city.' の 5分毎の降水確率<br>';
 
     // https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/weather.html
