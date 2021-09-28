@@ -5,6 +5,9 @@ $jsonObj = json_decode($jsonString);
 $message = $jsonObj->{"events"}[0]->{"message"};
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
+if ($message->{"type"} == 'location') {
+  $messageData = [ 'type' => 'text', 'text' => $message->{"address"} ];
+}
 
 // 送られてきたメッセージの中身からレスポンスのタイプを選択
 if ($message->{"text"} == 'テスト') {
@@ -49,10 +52,13 @@ if ($message->{"text"} == 'テスト') {
 
   $messageData = [ 'type' => 'text', 'text' => $txtmsg];
 }
+/*
 else {
   // それ以外は送られてきたテキストをオウム返し
   $messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
 };
+*/
+
 $response = [ 'replyToken' => $replyToken, 'messages' => [$messageData] ];
 error_log(json_encode($response));
 $ch = curl_init('https://api.line.me/v2/bot/message/reply');
