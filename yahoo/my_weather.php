@@ -6,7 +6,7 @@
 
   $weather = new get_weather();
 
-  print '$test1:'. $weather->get_weather();
+  print  $weather->get_weather();
 
 ?>
 <!--
