@@ -86,7 +86,10 @@ if ($message->{"text"} == 'テスト') {
             ]
     ];
 } elseif ($message->{"text"} == '天気') {
-  $messageData = [ 'type' => 'text', 'text' => "天気" ];
+  $txtmsg="一行目
+  ２行目
+  ３行目";
+  $messageData = [ 'type' => 'text', 'text' => $txtmsg];
 }
  else {
      // それ以外は送られてきたテキストをオウム返し
