@@ -6,7 +6,13 @@ $message = $jsonObj->{"events"}[0]->{"message"};
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
 
 if ($message->{"type"} == 'location') {
-  $messageData = [ 'type' => 'text', 'text' => $message->{"address"} ];
+  $latitude=$message->{"latitude"}
+  $longitude=$message->{"longitude"}
+  $adrs=$message->{"address"}
+  $txtmsg="latitude:".$latitude."\n";
+  $txtmsg.="longitude:".$longitude."\n";
+  $txtmsg.="address:".$adrs."\n";
+  $messageData = [ 'type' => 'text', 'text' => $txtmsg ];
 }
 
 // 送られてきたメッセージの中身からレスポンスのタイプを選択
@@ -54,8 +60,8 @@ if ($message->{"text"} == 'テスト') {
 }
 /*
 else {
-  // それ以外は送られてきたテキストをオウム返し
-  $messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
+// それ以外は送られてきたテキストをオウム返し
+$messageData = [ 'type' => 'text', 'text' => $message->{"text"} ];
 };
 */
 
